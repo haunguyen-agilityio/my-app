@@ -1,12 +1,12 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "main": "build/index.js",
-  "module": "build/index.es.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "files": [
-    "build"
+    "dist"
   ],
-  "source": "build/index.js",
+  "source": "src/index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
