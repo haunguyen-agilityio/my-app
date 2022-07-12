@@ -6,7 +6,7 @@
   "files": [
     "build"
   ],
-  "source": "src/index.js",
+  "source": "build/index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
