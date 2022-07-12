@@ -1,21 +1,33 @@
-import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+import { terser } from 'rollup-plugin-terser';
 import external from 'rollup-plugin-peer-deps-external';
-import del from 'rollup-plugin-delete';
-import pkg from './package.json';
+import postcss from 'rollup-plugin-postcss';
+
+const packageJson = require('./package.json');
 
 export default {
-    input: pkg.source,
+    input: 'src/index.ts',
     output: [
-        { file: pkg.main, format: 'cjs' },
-        { file: pkg.module, format: 'esm' }
+        {
+            file: packageJson.main,
+            format: 'cjs',
+            sourcemap: true,
+            name: 'react-lib'
+        },
+        {
+            file: packageJson.module,
+            format: 'esm',
+            sourcemap: true
+        }
     ],
     plugins: [
         external(),
-        babel({
-            exclude: 'node_modules/**',
-            babelHelpers: 'bundled' 
-        }),
-        del({ targets: ['dist/*'] }),
-    ],
-    external: Object.keys(pkg.peerDependencies || {}),
-};
+        resolve(),
+        commonjs(),
+        typescript({ tsconfig: './tsconfig.json' }),
+        postcss(),
+        terser()
+    ]
+}
